@@ -26,69 +26,67 @@ Renamed the default server hostname to DC01 to establish a standardized naming c
 
 Assigning meaningful names improves organization and scalability in multi-domain environments. Renaming the server triggered a system restart to apply the changes.
 
-<img src="https://github.com/user-attachments/assets/f801cb7e-6068-424e-bc1f-73d372cfeb1c" width="1000">
-<img src="https://github.com/user-attachments/assets/d4e14173-c2fd-46db-99d7-92244f0fc116" width="1000">
+<img src="https://github.com/user-attachments/assets/df59ae48-cfca-4c58-8082-848054164f20" width="1000"><br>
+<br>
+<img src="https://github.com/user-attachments/assets/be731d26-0e73-485b-9554-7fc185ee8f7b" width="1000">
 
 <hr style="border: 0.15px solid rgba(0, 0, 0, 0.05);">
 
-### Step 2: ISO Boot Order Configuration
-Adjusted virtual hardware settings to ensure the Windows Server ISO boots first, followed by the VirtIO ISO. This step ensures driver availability during installation.
+### Step 2: Begin Domain Controller Configuration
+Initiated the installation of domain controller features using Add Roles and Features from the Server Manager dashboard.
 
-<img src="https://github.com/user-attachments/assets/96b64655-b705-4a9c-832c-ae5558f0f9fe" width="1000">
-
-<hr style="border: 0.35px solid rgba(0, 0, 0, 0.05);">
-
-### Step 3: Windows Server Installation
-Launched the VM and installed Windows Server 2022 Desktop Experience. Selected region, language, and installation type (Custom Install). Proceeded through standard setup steps.
-
-<img src="https://github.com/user-attachments/assets/22b34de5-f488-4eb5-8a87-a56e0e50e10c" width="1000">
-<img src="https://github.com/user-attachments/assets/fe34e6fe-fb2f-48e4-8777-8eeab7867308" width="1000">
-<img src="https://github.com/user-attachments/assets/d8fe5b20-13e5-40ed-82d9-ac3122889065" width="1000">
+Role-Based and Feature-Based Installation: This option allows you to install Windows Server roles and features on the current VM.<br>
+<br>
+<img src="https://github.com/user-attachments/assets/23cbfa76-b77e-4e56-a9ff-91eeae51376d" width="1000">
 
 <hr style="border: 0.35px solid rgba(0, 0, 0, 0.05);">
 
-### Step 4: VirtIO Driver Installation
-Mounted the VirtIO ISO and manually installed critical drivers to enable virtual disk, network, and serial devices:
-- Red Hat VirtIO Ethernet  
-- VirtIO Balloon  
-- VirtIO SCSI  
-Download: https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/latest-virtio/
+Server Pool Selection: This means selecting the local or remote server you want to configure from a pool of available servers in the Server Manager.<br>
+<br>
 
-<img src="https://github.com/user-attachments/assets/66d417ad-d099-42f3-bf13-dd85f1464056" width="1000">
-<img src="https://github.com/user-attachments/assets/7ba4528d-32ee-41e6-be4a-d3c67cd01116" width="1000">
-<img src="https://github.com/user-attachments/assets/333c241e-2468-4391-adc9-4bd047cd26d1" width="1000">
-<img src="https://github.com/user-attachments/assets/02163f93-0de1-4754-92ca-e0b8ced2d787" width="1000">
-<img src="https://github.com/user-attachments/assets/05f5b0af-e47c-482d-b420-9707d13ad9ad" width="1000">
+<img src="https://github.com/user-attachments/assets/327d00e6-d3ba-4020-9653-e619ef5faae6" width="1000">
 
 <hr style="border: 0.35px solid rgba(0, 0, 0, 0.05);">
 
-### Step 5: Fixing PCI Simple Communications Controller Error
-Resolved missing driver by:
-1. Opening Device Manager  
-2. Right-clicking PCI Simple Communications Controller  
-3. Selecting “Browse my computer for drivers”  
-4. Navigating to VirtIO ISO and selecting the correct subfolder (e.g., NetKVM, Balloon)  
-5. Letting Windows search and install the driver
+Active Directory Domain Services (AD DS): This feature enables the creation and management of a centralized directory for user and computer authentication within a domain.<br>
+<br>
 
-<img src="https://github.com/user-attachments/assets/47aa077a-3c16-4f99-9596-a20de87ecf43" width="1000">
+<img src="https://github.com/user-attachments/assets/82f5fbc2-0a84-4e75-9030-dfc20c3d1736" width="1000">
 
 <hr style="border: 0.35px solid rgba(0, 0, 0, 0.05);">
 
-### Step 6: Fixing Keyboard Input Issues
-Resolved random input and keyboard glitches by:
-- Navigating to Advanced Keyboard Settings  
-- Switching input method to “English (United States) – US”
+All other roles were left at their default settings.<br>
+<br>
 
-<img src="https://github.com/user-attachments/assets/66a9f586-c9d7-4ebe-9e71-f7051a4f2120" width="1000">
+<img src="https://github.com/user-attachments/assets/b91138f1-4f66-492f-9728-347f505481f8" width="1000"><br>
+<br>
+<img src="https://github.com/user-attachments/assets/7816feab-33a1-467e-aaa3-eeced06e3044" width="1000">
+
 
 <hr style="border: 0.35px solid rgba(0, 0, 0, 0.05);">
 
-### Step 7: Final Setup and Static IP Configuration
-Completed administrator setup and manually updated the server’s IP address, subnet mask, and DNS server to place it on a secure internal network.
+### Step 3: Promote Server to Domain Controller
+After installing AD DS, proceeded to promote the server to a domain controller.
+Converts the standalone server into a domain controller responsible for managing user authentication and enforcing domain policies.<br>
+<br>
 
-<img src="https://github.com/user-attachments/assets/5ac9ae4a-a162-4b46-916e-921a02398c52" width="1000">
-<img src="https://github.com/user-attachments/assets/40c7428d-d2ed-4b95-890a-c0ccd8be208f" width="1000">
-<img src="https://github.com/user-attachments/assets/898e6c2b-8cd1-4d2d-855f-441314f267d6" width="1000">
-<img src="https://github.com/user-attachments/assets/f87a7e7c-52f5-4cce-b74e-cb404372d9a0" width="1000">
+<img src="https://github.com/user-attachments/assets/ee9ee536-ffa5-4685-98cf-cfb77d0e78c5" width="1000">
+
+<hr style="border: 0.35px solid rgba(0, 0, 0, 0.05);">
+
+New Forest Creation: Used the internal domain name DOOM.local to establish a new forest, the topmost structure in AD hierarchy.<br>
+<br>
+<img src="https://github.com/user-attachments/assets/b1efd7d0-b3d6-4c41-b259-dcdff22867e4" width="1000">
+
+<hr style="border: 0.35px solid rgba(0, 0, 0, 0.05);">
+
+Directory Services Restore Mode (DSRM) Password: This recovery password is used for restoring the domain controller in case of failure.<br>
+<br>
+<img src="https://github.com/user-attachments/assets/849de40a-c4e8-4cbe-8a53-e9b7876886ff" width="1000">
+
+<hr style="border: 0.35px solid rgba(0, 0, 0, 0.05);">
+
+
+
 
 
